@@ -21,7 +21,6 @@
             overflow-x: hidden;
         }
 
-        /* Верхняя панель статуса */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -57,7 +56,6 @@
             color: #888;
         }
 
-        /* Заголовок */
         header {
             text-align: center;
             padding: 40px 20px 10px;
@@ -77,7 +75,6 @@
             letter-spacing: 2px;
         }
 
-        /* Центральный блок рекламы */
         .ad-container {
             flex: 1;
             display: flex;
@@ -123,6 +120,22 @@
             pointer-events: none;
         }
 
+        /* Стиль для картинки внутри слота */
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .ad-content {
+            position: relative;
+            z-index: 2;
+        }
+
         .ad-label {
             font-size: 12px;
             letter-spacing: 3px;
@@ -144,7 +157,6 @@
             letter-spacing: 1px;
         }
 
-        /* Нижняя панель */
         footer {
             border-top: 1px solid #1f1f1f;
             padding: 20px 30px;
@@ -189,7 +201,6 @@
 </head>
 <body>
 
-    <!-- Верхняя панель -->
     <div class="top-bar">
         <div class="status">
             <span class="dot"></span>
@@ -198,26 +209,27 @@
         <div class="clock" id="clock">00:00:00</div>
     </div>
 
-    <!-- Заголовок -->
     <header>
         <h1>Zoffrikk</h1>
         <p>рекламное пространство</p>
     </header>
 
-    <!-- Центральное место под рекламу -->
     <div class="ad-container">
-        <div class="ad-slot" onclick="window.location.href='https://t.me/ваш_телеграм'">
-            <div class="ad-label">// слот 01</div>
-            <div class="ad-title">МЕСТО СВОБОДНО</div>
-            <div class="ad-subtitle">нажмите, чтобы забронировать</div>
+        <!-- Слот с картинкой -->
+        <div class="ad-slot" onclick="window.location.href='https://t.me/Ivanee_tg'">
+            <img src="https://i.imgur.com/8Q6Z9Qp.jpg" alt="Пример рекламы" class="ad-image">
+            <div class="ad-content">
+                <div class="ad-label">// слот 01 — ЗАНЯТО</div>
+                <div class="ad-title">ПРИМЕР РЕКЛАМЫ</div>
+                <div class="ad-subtitle">нажмите, чтобы узнать подробности</div>
+            </div>
         </div>
     </div>
 
-    <!-- Подвал -->
     <footer>
         <div class="footer-note">© ZOFFRIKK 2026</div>
         <div class="contact">
-            <a href="https://t.me/ваш_телеграм" target="_blank">Связаться →</a>
+            <a href="https://t.me/Ivanee_tg" target="_blank">Связаться → @Ivanee_tg</a>
         </div>
     </footer>
 
