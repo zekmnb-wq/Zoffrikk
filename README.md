@@ -211,12 +211,11 @@
 
     <header>
         <h1>Zoffrikk</h1>
-        <p>рекламное пространство</p>
     </header>
 
     <div class="ad-container">
         <div class="ad-slot" onclick="openLightbox()">
-            <img src="money.jpg" alt="Реклама" class="ad-image">
+            <img src="money.jpg" alt="Zoffrikk" class="ad-image">
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
                 <div class="ad-subtitle">нажмите, чтобы увеличить</div>
@@ -227,7 +226,7 @@
     <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="money.jpg.webp" alt="Реклама" onclick="event.stopPropagation()">
+        <img src="money.jpg.webp" alt="Zoffrikk" onclick="event.stopPropagation()">
     </div>
 
     <footer>
