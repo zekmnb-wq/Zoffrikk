@@ -102,25 +102,19 @@
         }
 
         .ad-slot:hover {
-            background-color: #151515;
-            box-shadow: 0 0 30px rgba(74, 222, 128, 0.15);
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.25);
         }
 
+        /* Затемнение поверх картинки, чтобы текст читался */
         .ad-slot::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(74, 222, 128, 0.03) 2px,
-                rgba(74, 222, 128, 0.03) 4px
-            );
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
             pointer-events: none;
         }
 
-        /* Стиль для картинки внутри слота */
         .ad-image {
             width: 100%;
             height: 100%;
@@ -128,7 +122,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 0;
         }
 
         .ad-content {
@@ -137,24 +131,19 @@
         }
 
         .ad-label {
-            font-size: 12px;
-            letter-spacing: 3px;
+            font-size: 13px;
+            letter-spacing: 4px;
             color: #4ade80;
-            margin-bottom: 15px;
             text-transform: uppercase;
-        }
-
-        .ad-title {
-            font-size: 28px;
-            color: #fff;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.9);
         }
 
         .ad-subtitle {
-            font-size: 14px;
-            color: #888;
+            font-size: 13px;
+            color: #ccc;
             letter-spacing: 1px;
+            margin-top: 12px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.9);
         }
 
         footer {
@@ -192,7 +181,6 @@
 
         @media (max-width: 600px) {
             header h1 { font-size: 22px; letter-spacing: 2px; }
-            .ad-title { font-size: 18px; }
             .ad-slot { aspect-ratio: 4 / 3; }
             .top-bar { font-size: 11px; padding: 12px 15px; }
             footer { flex-direction: column; text-align: center; }
@@ -215,12 +203,10 @@
     </header>
 
     <div class="ad-container">
-        <!-- Слот с картинкой -->
         <div class="ad-slot" onclick="window.location.href='https://t.me/Ivanee_tg'">
-            <img src="https://i.imgur.com/8Q6Z9Qp.jpg" alt="Пример рекламы" class="ad-image">
+            <img src="money.jpg" alt="Реклама" class="ad-image">
             <div class="ad-content">
-                <div class="ad-label">// слот 01 — ЗАНЯТО</div>
-                <div class="ad-title">ПРИМЕР РЕКЛАМЫ</div>
+                <div class="ad-label">// слот 01 — занято</div>
                 <div class="ad-subtitle">нажмите, чтобы узнать подробности</div>
             </div>
         </div>
