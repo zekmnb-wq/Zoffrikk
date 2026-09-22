@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoffrikk — реклама в центре</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: #0a0a0a;
@@ -32,16 +28,10 @@
             text-transform: uppercase;
         }
 
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #4ade80;
-        }
+        .status { display: flex; align-items: center; gap: 8px; color: #4ade80; }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background-color: #4ade80;
             border-radius: 50%;
             animation: pulse 1.5s infinite;
@@ -52,14 +42,9 @@
             50% { opacity: 0.3; box-shadow: 0 0 2px #4ade80; }
         }
 
-        .clock {
-            color: #888;
-        }
+        .clock { color: #888; }
 
-        header {
-            text-align: center;
-            padding: 40px 20px 10px;
-        }
+        header { text-align: center; padding: 40px 20px 10px; }
 
         header h1 {
             font-size: 32px;
@@ -69,11 +54,7 @@
             margin-bottom: 8px;
         }
 
-        header p {
-            color: #666;
-            font-size: 14px;
-            letter-spacing: 2px;
-        }
+        header p { color: #666; font-size: 14px; letter-spacing: 2px; }
 
         .ad-container {
             flex: 1;
@@ -101,11 +82,8 @@
             overflow: hidden;
         }
 
-        .ad-slot:hover {
-            box-shadow: 0 0 30px rgba(74, 222, 128, 0.25);
-        }
+        .ad-slot:hover { box-shadow: 0 0 30px rgba(74, 222, 128, 0.25); }
 
-        /* Затемнение поверх картинки, чтобы текст читался */
         .ad-slot::before {
             content: '';
             position: absolute;
@@ -120,15 +98,11 @@
             height: 100%;
             object-fit: cover;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             z-index: 0;
         }
 
-        .ad-content {
-            position: relative;
-            z-index: 2;
-        }
+        .ad-content { position: relative; z-index: 2; }
 
         .ad-label {
             font-size: 13px;
@@ -174,10 +148,7 @@
             box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
         }
 
-        .footer-note {
-            color: #444;
-            letter-spacing: 1px;
-        }
+        .footer-note { color: #444; letter-spacing: 1px; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 22px; letter-spacing: 2px; }
@@ -204,7 +175,7 @@
 
     <div class="ad-container">
         <div class="ad-slot" onclick="window.location.href='https://t.me/Ivanee_tg'">
-            <img src="money.jpg" alt="Реклама" class="ad-image">
+            <img src="money.jpg.webp" alt="Реклама" class="ad-image">
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
                 <div class="ad-subtitle">нажмите, чтобы узнать подробности</div>
