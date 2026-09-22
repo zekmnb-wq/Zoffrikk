@@ -77,7 +77,7 @@
             text-align: center;
             padding: 30px;
             transition: all 0.3s ease;
-            cursor: pointer;
+            cursor: zoom-in; /* курсор-лупа */
             position: relative;
             overflow: hidden;
         }
@@ -118,6 +118,47 @@
             letter-spacing: 1px;
             margin-top: 12px;
             text-shadow: 0 0 10px rgba(0,0,0,0.9);
+        }
+
+        /* === Модальное окно для увеличения === */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            padding: 20px;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border: 2px solid #4ade80;
+            box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
+            animation: zoomIn 0.25s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: #4ade80;
+            font-size: 24px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
         }
 
         footer {
@@ -174,13 +215,19 @@
     </header>
 
     <div class="ad-container">
-        <div class="ad-slot" onclick="window.location.href='https://t.me/Ivanee_tg'">
-            <img src="money.jpg.webp" alt="Реклама" class="ad-image">
+        <div class="ad-slot" onclick="openLightbox()">
+            <img src="money.jpg" alt="Реклама" class="ad-image">
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
-                <div class="ad-subtitle">нажмите, чтобы узнать подробности</div>
+                <div class="ad-subtitle">нажмите, чтобы увеличить</div>
             </div>
         </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
+        <img src="money.jpg" alt="Реклама" onclick="event.stopPropagation()">
     </div>
 
     <footer>
@@ -200,6 +247,21 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
+
+        function openLightbox() {
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
     </script>
 
 </body>
