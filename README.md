@@ -61,12 +61,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 25px;
             padding: 40px 20px;
+            flex-wrap: wrap;
         }
 
         .ad-slot {
             width: 100%;
-            max-width: 700px;
+            max-width: 500px;
             aspect-ratio: 16 / 9;
             border: 2px dashed #4ade80;
             background-color: #111;
@@ -103,25 +105,17 @@
             z-index: 0;
         }
 
-        .ad-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-            pointer-events: none;
+        /* Видео внутри слота */
+        .ad-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
         }
 
-        .ad-label {
-            font-size: 13px;
-            letter-spacing: 4px;
-            color: #4ade80;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0,0,0,0.9);
-            background: rgba(0,0,0,0.5);
-            padding: 6px 14px;
-            display: inline-block;
-        }
-
-        /* Модальное окно для увеличения */
+        /* Модальное окно */
         .lightbox {
             display: none;
             position: fixed;
@@ -142,6 +136,14 @@
             max-width: 95%;
             max-height: 95%;
             object-fit: contain;
+            border: 2px solid #4ade80;
+            box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
+            animation: zoomIn 0.25s ease;
+        }
+
+        .lightbox video {
+            max-width: 95%;
+            max-height: 95%;
             border: 2px solid #4ade80;
             box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
             animation: zoomIn 0.25s ease;
@@ -203,7 +205,7 @@
 
         @media (max-width: 600px) {
             header h1 { font-size: 22px; letter-spacing: 2px; }
-            .ad-slot { aspect-ratio: 4 / 3; }
+            .ad-slot { max-width: 100%; aspect-ratio: 4 / 3; }
             .top-bar { font-size: 11px; padding: 12px 15px; }
             footer { flex-direction: column; text-align: center; }
         }
@@ -225,18 +227,41 @@
     </header>
 
     <div class="ad-container">
-        <div class="ad-slot" onclick="openLightbox()">
+
+        <!-- ============================================ -->
+        <!-- СЛОТ 1: ФОТО                                  -->
+        <!-- Вставьте имя своего файла вместо "4.png"      -->
+        <!-- ============================================ -->
+        <div class="ad-slot" onclick="openLightbox('image')">
             <img src="4.png" alt="Реклама" class="ad-image">
-            <div class="ad-content">
-                <div class="ad-label">// слот 01 — занято</div>
-            </div>
         </div>
+
+        <!-- ============================================ -->
+        <!-- СЛОТ 2: ВИДЕО                                 -->
+        <!-- Вставьте имя своего файла вместо "video.mp4"  -->
+        <!-- ============================================ -->
+        <div class="ad-slot" onclick="openLightbox('video')">
+            <video class="ad-video" autoplay muted loop playsinline>
+                <source src="5.mp4" type="video/mp4">
+            </video>
+        </div>
+
     </div>
 
-    <!-- Модальное окно -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <!-- Модальное окно для фото -->
+    <div class="lightbox" id="lightbox-image" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
+        <!-- Имя файла фото (то же, что и выше) -->
         <img src="4.png" alt="Реклама" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Модальное окно для видео -->
+    <div class="lightbox" id="lightbox-video" onclick="closeLightbox()">
+        <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
+        <!-- Имя файла видео (то же, что и выше) -->
+        <video controls onclick="event.stopPropagation()">
+            <source src="5.mp4" type="video/mp4">
+        </video>
     </div>
 
     <footer>
@@ -264,13 +289,15 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        function openLightbox() {
-            document.getElementById('lightbox').classList.add('active');
+        function openLightbox(type) {
+            document.getElementById('lightbox-' + type).classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
+            document.querySelectorAll('.lightbox').forEach(function(el) {
+                el.classList.remove('active');
+            });
             document.body.style.overflow = '';
         }
 
