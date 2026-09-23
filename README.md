@@ -75,9 +75,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 30px;
+            padding: 0;
             transition: all 0.3s ease;
-            cursor: zoom-in; /* курсор-лупа */
+            cursor: zoom-in;
             position: relative;
             overflow: hidden;
         }
@@ -88,21 +88,27 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.35);
             z-index: 1;
             pointer-events: none;
         }
 
-        .ad-image {
+        /* Видео внутри слота */
+        .ad-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
             position: absolute;
             top: 0; left: 0;
             z-index: 0;
+            border: none;
         }
 
-        .ad-content { position: relative; z-index: 2; }
+        .ad-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            pointer-events: none;
+        }
 
         .ad-label {
             font-size: 13px;
@@ -110,24 +116,19 @@
             color: #4ade80;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.5);
+            padding: 6px 14px;
+            display: inline-block;
         }
 
-        .ad-subtitle {
-            font-size: 13px;
-            color: #ccc;
-            letter-spacing: 1px;
-            margin-top: 12px;
-            text-shadow: 0 0 10px rgba(0,0,0,0.9);
-        }
-
-        /* === Модальное окно для увеличения === */
+        /* Модальное окно для увеличения видео */
         .lightbox {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.92);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 9999;
             align-items: center;
             justify-content: center;
@@ -137,10 +138,10 @@
 
         .lightbox.active { display: flex; }
 
-        .lightbox img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
+        .lightbox iframe {
+            width: 90vw;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9;
             border: 2px solid #4ade80;
             box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
             animation: zoomIn 0.25s ease;
@@ -171,6 +172,16 @@
             gap: 15px;
             font-size: 14px;
         }
+
+        /* Счётчик хитов */
+        .hits-counter {
+            display: flex;
+            align-items: center;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .hits-counter:hover { opacity: 1; }
 
         .contact a {
             color: #4ade80;
@@ -211,14 +222,18 @@
 
     <header>
         <h1>Zoffrikk</h1>
+        <p>рекламное пространство</p>
     </header>
 
     <div class="ad-container">
         <div class="ad-slot" onclick="openLightbox()">
-            <img src="2.jpg" alt="Zoffrikk" class="ad-image">
+            <!-- ЗАМЕНИТЕ ВИДЕО_ID НА РЕАЛЬНЫЙ ID ВИДЕО С YOUTUBE -->
+            <iframe class="ad-video"
+                    src="https://www.youtube.com/embed/ВИДЕО_ID?autoplay=1&mute=1&loop=1&playlist=ВИДЕО_ID"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen></iframe>
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
-                <div class="ad-subtitle">нажмите, чтобы увеличить</div>
             </div>
         </div>
     </div>
@@ -226,11 +241,22 @@
     <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="2.jpg" alt="Zoffrikk" onclick="event.stopPropagation()">
+        <iframe src="https://www.youtube.com/embed/ВИДЕО_ID?autoplay=1&rel=0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                onclick="event.stopPropagation()"></iframe>
     </div>
 
     <footer>
         <div class="footer-note">© ZOFFRIKK 2026</div>
+
+        <!-- Счётчик посещений -->
+        <div class="hits-counter">
+            <a href="https://hits.sh/zekmnb-wq.github.io/Zoffrikk/">
+                <img alt="Хиты" src="https://hits.sh/zekmnb-wq.github.io/Zoffrikk.svg"/>
+            </a>
+        </div>
+
         <div class="contact">
             <a href="https://t.me/Ivanee_tg" target="_blank">Связаться → @Ivanee_tg</a>
         </div>
@@ -256,9 +282,7 @@
             document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = '';
         }
-    <a href="https://hits.sh/zekmnb-wq.github.io/Zoffrikk/"><img alt="Хиты" src="https://hits.sh/zekmnb-wq.github.io/Zoffrikk.svg"/></a>
 
-        // Закрытие по Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
