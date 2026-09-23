@@ -226,7 +226,7 @@
     <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="1.jpg.webp" alt="Zoffrikk" onclick="event.stopPropagation()">
+        <img src="1.jpg" alt="Zoffrikk" onclick="event.stopPropagation()">
     </div>
 
     <footer>
