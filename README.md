@@ -61,14 +61,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
             padding: 40px 20px;
-            flex-wrap: wrap;
         }
 
         .ad-slot {
             width: 100%;
-            max-width: 500px;
+            max-width: 700px;
             aspect-ratio: 16 / 9;
             border: 2px dashed #4ade80;
             background-color: #111;
@@ -95,16 +93,8 @@
             pointer-events: none;
         }
 
+        /* Картинка внутри слота */
         .ad-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0; left: 0;
-            z-index: 0;
-        }
-
-        .ad-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -131,6 +121,7 @@
             display: inline-block;
         }
 
+        /* Модальное окно для увеличения */
         .lightbox {
             display: none;
             position: fixed;
@@ -147,7 +138,7 @@
 
         .lightbox.active { display: flex; }
 
-        .lightbox img, .lightbox video {
+        .lightbox img {
             max-width: 95%;
             max-height: 95%;
             object-fit: contain;
@@ -170,62 +161,6 @@
             cursor: pointer;
             font-family: 'Courier New', monospace;
         }
-
-        /* Чат */
-        #chat-container {
-            max-width: 700px;
-            margin: 40px auto;
-            border: 1px solid #1f1f1f;
-            background: #111;
-            padding: 20px;
-            width: calc(100% - 40px);
-        }
-
-        .chat-title {
-            color: #4ade80;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        #chat-messages {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #1f1f1f;
-            padding: 10px;
-            margin-bottom: 15px;
-            color: #d0d0d0;
-            font-size: 14px;
-        }
-
-        #chat-messages div { margin-bottom: 6px; line-height: 1.4; word-wrap: break-word; }
-
-        .chat-inputs { display: flex; gap: 10px; }
-
-        .chat-inputs input {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-        }
-
-        #chat-name { width: 30%; }
-
-        #chat-input { flex: 1; }
-
-        .chat-inputs button {
-            background: #4ade80;
-            border: none;
-            color: #0a0a0a;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-        }
-
-        .chat-inputs button:hover { background: #38c46a; }
 
         footer {
             border-top: 1px solid #1f1f1f;
@@ -268,11 +203,9 @@
 
         @media (max-width: 600px) {
             header h1 { font-size: 22px; letter-spacing: 2px; }
-            .ad-slot { max-width: 100%; aspect-ratio: 4 / 3; }
+            .ad-slot { aspect-ratio: 4 / 3; }
             .top-bar { font-size: 11px; padding: 12px 15px; }
             footer { flex-direction: column; text-align: center; }
-            .chat-inputs { flex-direction: column; }
-            #chat-name { width: 100%; }
         }
     </style>
 </head>
@@ -300,17 +233,7 @@
         </div>
     </div>
 
-    <!-- Чат -->
-    <div id="chat-container">
-        <div class="chat-title">// ЧАТ</div>
-        <div id="chat-messages"></div>
-        <div class="chat-inputs">
-            <input type="text" id="chat-name" placeholder="Ваше имя">
-            <input type="text" id="chat-input" placeholder="Сообщение...">
-            <button onclick="sendMessage()">→</button>
-        </div>
-    </div>
-
+    <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
         <img src="money.jpg" alt="Реклама" onclick="event.stopPropagation()">
@@ -354,97 +277,6 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeLightbox();
         });
-    </script>
-
-    <!-- Firebase SDK + чат -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-        // ⚠️ ВСТАВЬТЕ СЮДА ВАШ firebaseConfig ИЗ КОНСОЛИ FIREBASE
-        const firebaseConfig = {
-            apiKey: "ВАШ_API_KEY",
-            authDomain: "ВАШ_AUTH_DOMAIN",
-            projectId: "ВАШ_PROJECT_ID",
-            storageBucket: "ВАШ_STORAGE_BUCKET",
-            messagingSenderId: "ВАШ_MESSAGING_SENDER_ID",
-            appId: "ВАШ_APP_ID"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const messagesCollection = collection(db, "chat_messages");
-        const messagesDiv = document.getElementById('chat-messages');
-
-        // Отправка сообщения
-        window.sendMessage = async function() {
-            const nameInput = document.getElementById('chat-name');
-            const messageInput = document.getElementById('chat-input');
-            const name = nameInput.value.trim();
-            const text = messageInput.value.trim();
-
-            if (name === '' || text === '') return;
-
-            try {
-                await addDoc(messagesCollection, {
-                    name: name,
-                    text: text,
-                    timestamp: serverTimestamp()
-                });
-                messageInput.value = '';
-            } catch (e) {
-                console.error("Ошибка при отправке: ", e);
-                alert("Не удалось отправить сообщение.");
-            }
-        };
-
-        // Отправка по Enter
-        document.getElementById('chat-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        // 1. Загружаем все старые сообщения один раз
-        async function loadExistingMessages() {
-            const q = query(messagesCollection, orderBy("timestamp", "asc"));
-            const querySnapshot = await getDocs(q);
-            messagesDiv.innerHTML = '';
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const msgElement = document.createElement('div');
-                msgElement.innerHTML = `<span style="color:#888;">[${escapeHtml(data.name)}]</span> <span>${escapeHtml(data.text)}</span>`;
-                messagesDiv.appendChild(msgElement);
-            });
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        // 2. Слушаем только новые сообщения
-        const q = query(messagesCollection, orderBy("timestamp", "asc"));
-        let firstLoad = true;
-
-        onSnapshot(q, (snapshot) => {
-            if (firstLoad) {
-                firstLoad = false;
-                return; // пропускаем первую выдачу — её отрисует loadExistingMessages
-            }
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === "added") {
-                    const data = change.doc.data();
-                    const msgElement = document.createElement('div');
-                    msgElement.innerHTML = `<span style="color:#888;">[${escapeHtml(data.name)}]</span> <span>${escapeHtml(data.text)}</span>`;
-                    messagesDiv.appendChild(msgElement);
-                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-                }
-            });
-        });
-
-        // Защита от XSS
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        loadExistingMessages();
     </script>
 
 </body>
