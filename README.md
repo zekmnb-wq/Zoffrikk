@@ -222,8 +222,8 @@
     </div>
 
     <header>
-        <h1>Zoffrikk</h1>
-        <p>рекламное пространство</p>
+        <h1>Ваш текст</h1>
+
     </header>
 
     <div class="ad-container">
@@ -275,7 +275,7 @@
         </div>
 
         <div class="contact">
-            <a href="https://t.me/Ivanee_tg" target="_blank">Связаться → @Ivanee_tg</a>
+            <a href="http://t.me/anonaskbot?start=CgcCzK0SmqALCVS" target="_blank">Связаться → @Ivanee_tg(анонки)</a>
         </div>
     </footer>
 
