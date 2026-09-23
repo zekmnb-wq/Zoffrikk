@@ -226,7 +226,7 @@
 
     <div class="ad-container">
         <div class="ad-slot" onclick="openLightbox()">
-            <img src="2.jpg" alt="Реклама" class="ad-image">
+            <img src="3.jpg" alt="Реклама" class="ad-image">
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
             </div>
@@ -236,7 +236,7 @@
     <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="2.jpg" alt="Реклама" onclick="event.stopPropagation()">
+        <img src="3.jpg" alt="Реклама" onclick="event.stopPropagation()">
     </div>
 
     <footer>
