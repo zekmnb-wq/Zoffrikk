@@ -256,6 +256,7 @@
             document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = '';
         }
+    <a href="https://hits.sh/zekmnb-wq.github.io/Zoffrikk/"><img alt="Хиты" src="https://hits.sh/zekmnb-wq.github.io/Zoffrikk.svg"/></a>
 
         // Закрытие по Escape
         document.addEventListener('keydown', function(e) {
