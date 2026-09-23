@@ -307,5 +307,79 @@
         });
     </script>
 
+<!-- Чат -->
+<div id="chat-container" style="max-width:700px; margin: 40px auto; border: 1px solid #1f1f1f; background: #111; padding: 20px; font-family: 'Courier New', monospace;">
+    <div style="color: #4ade80; letter-spacing: 2px; margin-bottom: 15px; font-size: 14px; text-transform: uppercase;">// ЧАТ</div>
+    <div id="chat-messages" style="height: 300px; overflow-y: auto; border: 1px solid #1f1f1f; padding: 10px; margin-bottom: 15px; color: #d0d0d0; font-size: 14px;"></div>
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="chat-name" placeholder="Ваше имя" style="width: 30%; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 10px; font-family: 'Courier New', monospace;">
+        <input type="text" id="chat-input" placeholder="Сообщение..." style="flex: 1; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 10px; font-family: 'Courier New', monospace;">
+        <button onclick="sendMessage()" style="background: #4ade80; border: none; color: #0a0a0a; padding: 10px 20px; cursor: pointer; font-weight: bold; font-family: 'Courier New', monospace;">→</button>
+    </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+    // Импортируем нужные функции из Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // ВСТАВЬТЕ СЮДА ВАШ firebaseConfig ИЗ ШАГА 2
+    const firebaseConfig = {
+        apiKey: "ВАШ_API_KEY",
+        authDomain: "ВАШ_AUTH_DOMAIN",
+        projectId: "ВАШ_PROJECT_ID",
+        storageBucket: "ВАШ_STORAGE_BUCKET",
+        messagingSenderId: "ВАШ_MESSAGING_SENDER_ID",
+        appId: "ВАШ_APP_ID"
+    };
+
+    // Инициализация
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Ссылка на коллекцию, где будут храниться сообщения
+    const messagesCollection = collection(db, "chat_messages");
+
+    // Функция отправки сообщения
+    window.sendMessage = async function() {
+        const nameInput = document.getElementById('chat-name');
+        const messageInput = document.getElementById('chat-input');
+        const name = nameInput.value.trim();
+        const text = messageInput.value.trim();
+
+        if (name === '' || text === '') return;
+
+        try {
+            await addDoc(messagesCollection, {
+                name: name,
+                text: text,
+                timestamp: serverTimestamp()
+            });
+            messageInput.value = ''; // Очистить поле ввода
+        } catch (e) {
+            console.error("Ошибка при отправке: ", e);
+            alert("Не удалось отправить сообщение.");
+        }
+    };
+
+    // Слушаем новые сообщения в реальном времени
+    const q = query(messagesCollection, orderBy("timestamp", "asc"));
+    const messagesDiv = document.getElementById('chat-messages');
+
+    onSnapshot(q, (snapshot) => {
+        messagesDiv.innerHTML = ''; // Очистить текущие сообщения
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const msgElement = document.createElement('div');
+            // Простой стиль для сообщений
+            msgElement.innerHTML = `<span style="color: #888;">[${data.name}]</span> <span style="color: #d0d0d0;">${data.text}</span>`;
+            messagesDiv.appendChild(msgElement);
+        });
+        // Автоматически прокручиваем вниз
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    });
+</script>
+
 </body>
 </html>
