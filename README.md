@@ -93,14 +93,14 @@
             pointer-events: none;
         }
 
-        /* Видео внутри слота */
-        .ad-video {
+        /* Картинка внутри слота */
+        .ad-image {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             position: absolute;
             top: 0; left: 0;
             z-index: 0;
-            border: none;
         }
 
         .ad-content {
@@ -121,7 +121,7 @@
             display: inline-block;
         }
 
-        /* Модальное окно для увеличения видео */
+        /* Модальное окно для увеличения */
         .lightbox {
             display: none;
             position: fixed;
@@ -138,10 +138,10 @@
 
         .lightbox.active { display: flex; }
 
-        .lightbox iframe {
-            width: 90vw;
-            max-width: 1200px;
-            aspect-ratio: 16 / 9;
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
             border: 2px solid #4ade80;
             box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
             animation: zoomIn 0.25s ease;
@@ -173,7 +173,6 @@
             font-size: 14px;
         }
 
-        /* Счётчик хитов */
         .hits-counter {
             display: flex;
             align-items: center;
@@ -227,11 +226,7 @@
 
     <div class="ad-container">
         <div class="ad-slot" onclick="openLightbox()">
-            <!-- ЗАМЕНИТЕ ВИДЕО_ID НА РЕАЛЬНЫЙ ID ВИДЕО С YOUTUBE -->
-            <iframe class="ad-video"
-                    src="https://www.youtube.com/embed/ВИДЕО_ID?autoplay=1&mute=1&loop=1&playlist=ВИДЕО_ID"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen></iframe>
+            <img src="2.jpg" alt="Реклама" class="ad-image">
             <div class="ad-content">
                 <div class="ad-label">// слот 01 — занято</div>
             </div>
@@ -241,16 +236,12 @@
     <!-- Модальное окно -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <iframe src="https://www.youtube.com/embed/ВИДЕО_ID?autoplay=1&rel=0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                onclick="event.stopPropagation()"></iframe>
+        <img src="2.jpg" alt="Реклама" onclick="event.stopPropagation()">
     </div>
 
     <footer>
         <div class="footer-note">© ZOFFRIKK 2026</div>
 
-        <!-- Счётчик посещений -->
         <div class="hits-counter">
             <a href="https://hits.sh/zekmnb-wq.github.io/Zoffrikk/">
                 <img alt="Хиты" src="https://hits.sh/zekmnb-wq.github.io/Zoffrikk.svg"/>
