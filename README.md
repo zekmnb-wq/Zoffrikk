@@ -234,7 +234,7 @@
 
         <!-- Слот 1: фото -->
         <div class="ad-slot" onclick="openLightbox('image')">
-            <img src="6.png" alt="Реклама" class="ad-image">
+            <img src="6.jpg" alt="Реклама" class="ad-image">
         </div>
 
         <!-- Слот 2: локальное видео mp4 -->
@@ -251,7 +251,7 @@
     <!-- Модальное окно для фото -->
     <div class="lightbox" id="lightbox-image" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="6.png" alt="Реклама" onclick="event.stopPropagation()">
+        <img src="6.jpg" alt="Реклама" onclick="event.stopPropagation()">
     </div>
 
     <!-- Модальное окно для видео -->
