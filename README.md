@@ -44,7 +44,6 @@
 
         .clock { color: #888; }
 
-        /* ===== Заголовок слайда ===== */
         .slide-title {
             text-align: center;
             font-size: 28px;
@@ -61,7 +60,6 @@
             text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
         }
 
-        /* ===== Карусель ===== */
         .carousel {
             position: relative;
             flex: 1;
@@ -93,7 +91,6 @@
             to   { opacity: 1; transform: translateX(0); }
         }
 
-        /* Стрелки */
         .nav-arrow {
             position: absolute;
             top: 50%;
@@ -123,7 +120,6 @@
         .nav-arrow.prev { left: 10px; }
         .nav-arrow.next { right: 10px; }
 
-        /* Точки */
         .dots {
             display: flex;
             justify-content: center;
@@ -149,7 +145,6 @@
 
         .dot-indicator:hover { background: rgba(74, 222, 128, 0.5); }
 
-        /* Сетка слотов 3×3 */
         .ad-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -176,6 +171,15 @@
 
         .ad-slot:hover { box-shadow: 0 0 30px rgba(74, 222, 128, 0.25); }
 
+        /* Тестовый слот — жёлтая рамка */
+        .ad-slot.test {
+            border-color: #facc15;
+        }
+
+        .ad-slot.test:hover {
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.35);
+        }
+
         .ad-slot::before {
             content: '';
             position: absolute;
@@ -197,7 +201,6 @@
             z-index: 0;
         }
 
-        /* Надпись «ЗАНЯТЬ СЛОТ» */
         .slot-label {
             position: relative;
             z-index: 2;
@@ -220,7 +223,18 @@
             letter-spacing: 5px;
         }
 
-        /* Музыка — «скоро» */
+        /* Тестовая надпись */
+        .ad-slot.test .slot-label {
+            color: #facc15;
+            border-color: #facc15;
+        }
+
+        .ad-slot.test:hover .slot-label {
+            background: #facc15;
+            color: #0a0a0a;
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.7);
+        }
+
         .music-placeholder {
             display: flex;
             flex-direction: column;
@@ -253,7 +267,6 @@
             50% { text-shadow: 0 0 80px rgba(74, 222, 128, 0.8); }
         }
 
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -359,14 +372,13 @@
         <div class="clock" id="clock">00:00:00</div>
     </div>
 
-    <!-- Карусель -->
     <div class="carousel">
 
         <button class="nav-arrow prev" onclick="goPrev()">‹</button>
 
         <div class="slides-viewport">
 
-            <!-- Слайд 1: ФОТО -->
+            <!-- Слайд 1: ФОТО (9 обычных + 1 тестовый = 10) -->
             <div class="slide active" data-index="0">
                 <div class="slide-title">[ <span>ФОТО</span> ]</div>
                 <div class="ad-container">
@@ -379,10 +391,12 @@
                     <div class="ad-slot" onclick="openLightbox('photo-7')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
                     <div class="ad-slot" onclick="openLightbox('photo-8')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
                     <div class="ad-slot" onclick="openLightbox('photo-9')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <!-- ТЕСТОВЫЙ СЛОТ -->
+                    <div class="ad-slot test" onclick="openLightbox('photo-test')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Тест</span></div>
                 </div>
             </div>
 
-            <!-- Слайд 2: ВИДЕО -->
+            <!-- Слайд 2: ВИДЕО (9 обычных + 1 тестовый = 10) -->
             <div class="slide" data-index="1">
                 <div class="slide-title">[ <span>ВИДЕО</span> ]</div>
                 <div class="ad-container">
@@ -395,6 +409,8 @@
                     <div class="ad-slot" onclick="openLightbox('video-7')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
                     <div class="ad-slot" onclick="openLightbox('video-8')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
                     <div class="ad-slot" onclick="openLightbox('video-9')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <!-- ТЕСТОВЫЙ СЛОТ -->
+                    <div class="ad-slot test" onclick="openLightbox('video-test')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Тест</span></div>
                 </div>
             </div>
 
@@ -412,7 +428,6 @@
         <button class="nav-arrow next" onclick="goNext()">›</button>
     </div>
 
-    <!-- Точки-индикаторы -->
     <div class="dots">
         <button class="dot-indicator active" onclick="goTo(0)"></button>
         <button class="dot-indicator" onclick="goTo(1)"></button>
@@ -429,6 +444,7 @@
     <div class="lightbox" id="lightbox-photo-7" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
     <div class="lightbox" id="lightbox-photo-8" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
     <div class="lightbox" id="lightbox-photo-9" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-test" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
 
     <!-- Lightbox'ы: видео -->
     <div class="lightbox" id="lightbox-video-1" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
@@ -440,6 +456,7 @@
     <div class="lightbox" id="lightbox-video-7" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
     <div class="lightbox" id="lightbox-video-8" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
     <div class="lightbox" id="lightbox-video-9" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-test" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
 
     <footer>
         <div class="footer-note">© ZOFFRIKK 2026</div>
@@ -456,7 +473,6 @@
     </footer>
 
     <script>
-        /* Часы */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -467,7 +483,6 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        /* ===== Карусель ===== */
         let current = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot-indicator');
@@ -498,14 +513,12 @@
         function goPrev() { showSlide(current - 1, 'back'); }
         function goTo(i)  { showSlide(i, i > current ? 'next' : 'back'); }
 
-        /* Клавиатура */
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight') goNext();
             if (e.key === 'ArrowLeft')  goPrev();
             if (e.key === 'Escape')     closeLightbox();
         });
 
-        /* Свайпы */
         let touchStartX = 0;
         const carousel = document.querySelector('.carousel');
         carousel.addEventListener('touchstart', function(e) {
@@ -519,7 +532,6 @@
             }
         }, { passive: true });
 
-        /* ===== Lightbox ===== */
         function openLightbox(id) {
             document.getElementById('lightbox-' + id).classList.add('active');
             document.body.style.overflow = 'hidden';
