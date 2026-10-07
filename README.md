@@ -44,32 +44,121 @@
 
         .clock { color: #888; }
 
-        header { text-align: center; padding: 40px 20px 10px; }
-
-        header h1 {
-            font-size: 32px;
-            letter-spacing: 4px;
-            color: #fff;
+        /* ===== Заголовок слайда ===== */
+        .slide-title {
+            text-align: center;
+            font-size: 28px;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #1f1f1f;
         }
 
-        header p { color: #666; font-size: 14px; letter-spacing: 2px; }
+        .slide-title span {
+            color: #4ade80;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+        }
 
-        /* Контейнер для двух слотов рядом */
-        .ad-container {
+        /* ===== Карусель ===== */
+        .carousel {
+            position: relative;
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
-            padding: 40px 20px;
-            flex-wrap: wrap;
+            padding: 40px 70px 30px;
+            overflow: hidden;
+        }
+
+        .slides-viewport {
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
+
+        .slide { display: none; animation: slideIn 0.45s ease; }
+        .slide.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(40px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide.back { animation: slideInBack 0.45s ease; }
+
+        @keyframes slideInBack {
+            from { opacity: 0; transform: translateX(-40px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Стрелки */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: #4ade80;
+            border: 1px solid #333;
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            background: #4ade80;
+            color: #0a0a0a;
+            border-color: #4ade80;
+            box-shadow: 0 0 25px rgba(74, 222, 128, 0.5);
+        }
+
+        .nav-arrow.prev { left: 10px; }
+        .nav-arrow.next { right: 10px; }
+
+        /* Точки */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 0 30px;
+        }
+
+        .dot-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #4ade80;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .dot-indicator.active {
+            background: #4ade80;
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+        }
+
+        .dot-indicator:hover { background: rgba(74, 222, 128, 0.5); }
+
+        /* Сетка слотов 3×3 */
+        .ad-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
         }
 
         .ad-slot {
             width: 100%;
-            max-width: 500px;
             aspect-ratio: 16 / 9;
             border: 2px dashed #4ade80;
             background-color: #111;
@@ -91,33 +180,80 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
+            pointer-events: none;
+            transition: background 0.3s ease;
+        }
+
+        .ad-slot:hover::before { background: rgba(0, 0, 0, 0.25); }
+
+        .ad-image, .ad-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+
+        /* Надпись «ЗАНЯТЬ СЛОТ» */
+        .slot-label {
+            position: relative;
+            z-index: 2;
+            color: #4ade80;
+            font-size: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border: 1px solid #4ade80;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(2px);
+            transition: all 0.3s ease;
             pointer-events: none;
         }
 
-        /* Картинка внутри слота */
-        .ad-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0; left: 0;
-            z-index: 0;
+        .ad-slot:hover .slot-label {
+            background: #4ade80;
+            color: #0a0a0a;
+            box-shadow: 0 0 25px rgba(74, 222, 128, 0.6);
+            letter-spacing: 5px;
         }
 
-        /* Видео внутри слота */
-        .ad-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0; left: 0;
-            z-index: 0;
-            border: none;
+        /* Музыка — «скоро» */
+        .music-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            min-height: 40vh;
         }
 
-        /* Модальное окно для увеличения */
+        .music-placeholder .soon {
+            font-size: clamp(48px, 12vw, 120px);
+            letter-spacing: 20px;
+            color: #4ade80;
+            text-transform: uppercase;
+            text-shadow: 0 0 40px rgba(74, 222, 128, 0.4);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .music-placeholder .sub {
+            margin-top: 30px;
+            color: #555;
+            letter-spacing: 6px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 40px rgba(74, 222, 128, 0.4); }
+            50% { text-shadow: 0 0 80px rgba(74, 222, 128, 0.8); }
+        }
+
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -134,18 +270,10 @@
 
         .lightbox.active { display: flex; }
 
-        .lightbox img {
+        .lightbox img, .lightbox video {
             max-width: 95%;
             max-height: 95%;
             object-fit: contain;
-            border: 2px solid #4ade80;
-            box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
-            animation: zoomIn 0.25s ease;
-        }
-
-        .lightbox video {
-            max-width: 95%;
-            max-height: 95%;
             border: 2px solid #4ade80;
             box-shadow: 0 0 50px rgba(74, 222, 128, 0.3);
             animation: zoomIn 0.25s ease;
@@ -175,15 +303,10 @@
             flex-wrap: wrap;
             gap: 15px;
             font-size: 14px;
+            margin-top: auto;
         }
 
-        .hits-counter {
-            display: flex;
-            align-items: center;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
+        .hits-counter { display: flex; align-items: center; opacity: 0.8; transition: opacity 0.3s ease; }
         .hits-counter:hover { opacity: 1; }
 
         .contact a {
@@ -205,10 +328,23 @@
 
         .footer-note { color: #444; letter-spacing: 1px; }
 
+        @media (max-width: 800px) {
+            .ad-container { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .carousel { padding: 25px 55px; }
+            .nav-arrow { width: 40px; height: 40px; font-size: 18px; }
+            .slot-label { font-size: 12px; letter-spacing: 2px; padding: 7px 12px; }
+            .slide-title { font-size: 22px; letter-spacing: 5px; }
+        }
+
         @media (max-width: 600px) {
-            header h1 { font-size: 22px; letter-spacing: 2px; }
-            .ad-slot { max-width: 100%; aspect-ratio: 4 / 3; }
+            .ad-container { grid-template-columns: 1fr; }
             .top-bar { font-size: 11px; padding: 12px 15px; }
+            .carousel { padding: 15px 45px; }
+            .nav-arrow { width: 34px; height: 34px; font-size: 16px; }
+            .nav-arrow.prev { left: 4px; }
+            .nav-arrow.next { right: 4px; }
+            .slot-label { font-size: 11px; letter-spacing: 2px; }
+            .slide-title { font-size: 18px; letter-spacing: 3px; margin-bottom: 15px; padding-bottom: 10px; }
             footer { flex-direction: column; text-align: center; }
         }
     </style>
@@ -223,47 +359,87 @@
         <div class="clock" id="clock">00:00:00</div>
     </div>
 
-    <header>
-        <h1>Ваш текст</h1>
-    </header>
+    <!-- Карусель -->
+    <div class="carousel">
 
- <!---------------------------------------------------------------------------------------------------------------->
+        <button class="nav-arrow prev" onclick="goPrev()">‹</button>
 
-    <!-- Два слота рядом -->
-    <div class="ad-container">
+        <div class="slides-viewport">
 
-        <!-- Слот 1: фото -->
-        <div class="ad-slot" onclick="openLightbox('image')">
-            <img src="6.jpg" alt="Реклама" class="ad-image">
+            <!-- Слайд 1: ФОТО -->
+            <div class="slide active" data-index="0">
+                <div class="slide-title">[ <span>ФОТО</span> ]</div>
+                <div class="ad-container">
+                    <div class="ad-slot" onclick="openLightbox('photo-1')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-2')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-3')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-4')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-5')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-6')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-7')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-8')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('photo-9')"><img src="6.jpg" alt="" class="ad-image" onerror="this.style.display='none'"><span class="slot-label">Занять слот</span></div>
+                </div>
+            </div>
+
+            <!-- Слайд 2: ВИДЕО -->
+            <div class="slide" data-index="1">
+                <div class="slide-title">[ <span>ВИДЕО</span> ]</div>
+                <div class="ad-container">
+                    <div class="ad-slot" onclick="openLightbox('video-1')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-2')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-3')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-4')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-5')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-6')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-7')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-8')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                    <div class="ad-slot" onclick="openLightbox('video-9')"><video class="ad-video" autoplay muted loop playsinline><source src="IMG_3985.MP4" type="video/mp4"></video><span class="slot-label">Занять слот</span></div>
+                </div>
+            </div>
+
+            <!-- Слайд 3: МУЗЫКА -->
+            <div class="slide" data-index="2">
+                <div class="slide-title">[ <span>МУЗЫКА</span> ]</div>
+                <div class="music-placeholder">
+                    <div class="soon">СКОРО</div>
+                    <div class="sub">// музыкальный раздел в разработке //</div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Слот 2: локальное видео mp4 -->
-        <!-- Загрузите файл video.mp4 в корень репозитория рядом с index.html -->
-        <div class="ad-slot" onclick="openLightbox('video')">
-            <video class="ad-video" autoplay muted loop playsinline>
-                <source src="IMG_3985.MP4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-        </div>
-
+        <button class="nav-arrow next" onclick="goNext()">›</button>
     </div>
 
-    <!-- Модальное окно для фото -->
-    <div class="lightbox" id="lightbox-image" onclick="closeLightbox()">
-        <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <img src="6.jpg" alt="Реклама" onclick="event.stopPropagation()">
+    <!-- Точки-индикаторы -->
+    <div class="dots">
+        <button class="dot-indicator active" onclick="goTo(0)"></button>
+        <button class="dot-indicator" onclick="goTo(1)"></button>
+        <button class="dot-indicator" onclick="goTo(2)"></button>
     </div>
 
-    <!-- Модальное окно для видео -->
-    <div class="lightbox" id="lightbox-video" onclick="closeLightbox()">
-        <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
-        <video controls onclick="event.stopPropagation()">
-            <source src="IMG_3985.MP4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
+    <!-- Lightbox'ы: фото -->
+    <div class="lightbox" id="lightbox-photo-1" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-2" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-3" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-4" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-5" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-6" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-7" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-8" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
+    <div class="lightbox" id="lightbox-photo-9" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><img src="6.jpg" onclick="event.stopPropagation()"></div>
 
-     <!-------------------------------------------------------------------------------------------------------------->
+    <!-- Lightbox'ы: видео -->
+    <div class="lightbox" id="lightbox-video-1" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-2" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-3" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-4" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-5" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-6" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-7" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-8" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
+    <div class="lightbox" id="lightbox-video-9" onclick="closeLightbox()"><div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div><video controls onclick="event.stopPropagation()"><source src="IMG_3985.MP4" type="video/mp4"></video></div>
 
     <footer>
         <div class="footer-note">© ZOFFRIKK 2026</div>
@@ -280,6 +456,7 @@
     </footer>
 
     <script>
+        /* Часы */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -290,8 +467,61 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        function openLightbox(type) {
-            document.getElementById('lightbox-' + type).classList.add('active');
+        /* ===== Карусель ===== */
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot-indicator');
+        const total = slides.length;
+
+        function showSlide(index, direction) {
+            if (index < 0) index = total - 1;
+            if (index >= total) index = 0;
+
+            slides.forEach(function(s) { s.classList.remove('active', 'back'); });
+            dots.forEach(function(d) { d.classList.remove('active'); });
+
+            const slide = slides[index];
+            slide.classList.add('active');
+            if (direction === 'back') slide.classList.add('back');
+            dots[index].classList.add('active');
+
+            slides.forEach(function(s, i) {
+                if (i !== index) {
+                    s.querySelectorAll('video').forEach(function(v) { v.pause(); });
+                }
+            });
+
+            current = index;
+        }
+
+        function goNext() { showSlide(current + 1, 'next'); }
+        function goPrev() { showSlide(current - 1, 'back'); }
+        function goTo(i)  { showSlide(i, i > current ? 'next' : 'back'); }
+
+        /* Клавиатура */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') goNext();
+            if (e.key === 'ArrowLeft')  goPrev();
+            if (e.key === 'Escape')     closeLightbox();
+        });
+
+        /* Свайпы */
+        let touchStartX = 0;
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', function(e) {
+            const diff = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(diff) > 50) {
+                if (diff < 0) goNext();
+                else goPrev();
+            }
+        }, { passive: true });
+
+        /* ===== Lightbox ===== */
+        function openLightbox(id) {
+            document.getElementById('lightbox-' + id).classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
@@ -301,10 +531,6 @@
             });
             document.body.style.overflow = '';
         }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
-        });
     </script>
 
 </body>
