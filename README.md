@@ -241,7 +241,7 @@
         <!-- Загрузите файл video.mp4 в корень репозитория рядом с index.html -->
         <div class="ad-slot" onclick="openLightbox('video')">
             <video class="ad-video" autoplay muted loop playsinline>
-                <source src="5.mp4" type="video/mp4">
+                <source src="IMG_3985.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
         </div>
@@ -258,7 +258,7 @@
     <div class="lightbox" id="lightbox-video" onclick="closeLightbox()">
         <div class="lightbox-close" onclick="closeLightbox()">[ ЗАКРЫТЬ ✕ ]</div>
         <video controls onclick="event.stopPropagation()">
-            <source src="5.mp4" type="video/mp4">
+            <source src="IMG_3985.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
     </div>
