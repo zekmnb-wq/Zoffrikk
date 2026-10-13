@@ -483,12 +483,12 @@
 
                 <!-- ЦАРЬ -->
                 <div class="king-grid">
-                    <div class="royal" onclick="location.href='#upload'">
+                    <div class="royal">
                         <span class="crown">👑</span>
                         <span class="royal-badge">ЦАРЬ ФОТО #1</span>
                         <span class="royal-title">ЦАРЬ ФОТО #1</span>
                         <span class="royal-price">70 ₽ / 7 дней</span>
-                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-100" class="tg-slot-btn" onclick="event.stopPropagation()">📱 В бота</a>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-100" class="tg-slot-btn">📱 В бота</a>
                     </div>
                 </div>
 
@@ -514,14 +514,42 @@
                 <!-- STANDARD -->
                 <div class="subsection-title">⬛ STANDARD</div>
                 <div class="grid-box">
-                    <img src="uploads/2026-10-05_01.51.19.png" class="pic">
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-2" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-3" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-4" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-5" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-6" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-7" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-8" class="tg-slot-btn">📱 В бота</a></div>
+
+                    <!-- Слот 1 — ЗАНЯТ (фото клиента) -->
+                    <div class="cell" onclick="openLightbox('photo-1')">
+                        <img src="uploads/2026-10-05_01.51.19.png" class="pic" alt="">
+                        <span class="tag">Занято</span>
+                    </div>
+
+                    <!-- Слоты 2-8 — СВОБОДНЫ -->
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-2" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-3" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-4" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-5" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-6" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-7" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-8" class="tg-slot-btn">📱 В бота</a>
+                    </div>
                 </div>
             </div>
 
@@ -529,6 +557,7 @@
             <div class="panel">
                 <h2 class="section-title">[ <span>ВИДЕО</span> ]</h2>
 
+                <!-- ЦАРЬ -->
                 <div class="king-grid">
                     <div class="royal">
                         <span class="crown">👑</span>
@@ -539,6 +568,7 @@
                     </div>
                 </div>
 
+                <!-- PREMIUM -->
                 <div class="subsection-title">💎 PREMIUM</div>
                 <div class="premium-grid">
                     <div class="premium">
@@ -557,16 +587,41 @@
                     </div>
                 </div>
 
+                <!-- STANDARD -->
                 <div class="subsection-title">⬛ STANDARD</div>
                 <div class="grid-box">
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-11" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-12" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-13" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-14" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-15" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-16" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-17" class="tg-slot-btn">📱 В бота</a></div>
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-18" class="tg-slot-btn">📱 В бота</a></div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-11" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-12" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-13" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-14" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-15" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-16" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-17" class="tg-slot-btn">📱 В бота</a>
+                    </div>
+                    <div class="cell">
+                        <span class="tag">10 ₽ / 1 день</span>
+                        <a href="https://t.me/ZoffrikkBot?start=СЛОТ-18" class="tg-slot-btn">📱 В бота</a>
+                    </div>
                 </div>
             </div>
 
@@ -578,6 +633,12 @@
     <div class="dot-row">
         <button class="dot-btn active" onclick="goTo(0)"></button>
         <button class="dot-btn" onclick="goTo(1)"></button>
+    </div>
+
+    <!-- Лайтбокс для фото 1 -->
+    <div class="lightbox" id="lightbox-photo-1" onclick="closeLightbox()">
+        <div class="lightbox-close">[ ЗАКРЫТЬ ✕ ]</div>
+        <img src="uploads/2026-10-05_01.51.19.png" onclick="event.stopPropagation()">
     </div>
 
     <footer>
@@ -626,6 +687,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight') goNext();
             if (e.key === 'ArrowLeft')  goPrev();
+            if (e.key === 'Escape')     closeLightbox();
         });
 
         var touchStartX = 0;
@@ -641,6 +703,21 @@
                     else goPrev();
                 }
             }, { passive: true });
+        }
+
+        function openLightbox(id) {
+            var el = document.getElementById('lightbox-' + id);
+            if (el) {
+                el.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeLightbox() {
+            var els = document.querySelectorAll('.lightbox');
+            for (var i = 0; i < els.length; i++) {
+                els[i].classList.remove('active');
+            }
+            document.body.style.overflow = '';
         }
     </script>
 
