@@ -514,7 +514,7 @@
                 <!-- STANDARD -->
                 <div class="subsection-title">⬛ STANDARD</div>
                 <div class="grid-box">
-                    <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-1" class="tg-slot-btn">📱 В бота</a></div>
+                    <img src="uploads/2026-10-05_01.51.19.png" class="pic">
                     <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-2" class="tg-slot-btn">📱 В бота</a></div>
                     <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-3" class="tg-slot-btn">📱 В бота</a></div>
                     <div class="cell"><span class="tag">10 ₽ / 1 день</span><a href="https://t.me/ZoffrikkBot?start=СЛОТ-4" class="tg-slot-btn">📱 В бота</a></div>
